@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\scene">
+      <UniqueIdentifier>{ba96ee8d-f867-43c3-be52-2f50c4f35665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\unit">
+      <UniqueIdentifier>{8f2603f9-de7f-48e8-8216-76ee9bb3302d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\unit\bullet">
+      <UniqueIdentifier>{fae9fe1c-dac3-4f42-9fc9-5bf59b97a972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\unit\enemy">
+      <UniqueIdentifier>{dbd20b3f-a39a-4668-80fc-22719d3cf06d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source.cpp">
@@ -20,7 +32,34 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="head.h">
+    <ClInclude Include="util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="menu_scene.h">
+      <Filter>头文件\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>头文件\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>头文件\unit\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="game_scene.h">
+      <Filter>头文件\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>头文件\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>头文件\unit\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="animition.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

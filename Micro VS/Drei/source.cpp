@@ -1,16 +1,61 @@
 #include<iostream>
 #include<graphics.h>
-#include"head.h"
+#include<string>
+#include<vector>
+
+
+#include"util.h"
+#include"player.h"
+//#include"enemy.h"
+//#include"bullet.h"
+//#include"scene.h"
+//#include"scene_manager.h"
+
 
 int idx_current_anim = 0;
 
 const int PLAYER_ANIM_NUM = 6;
 
-POINT player_pos = { 400 , 400 };
 
-const int PLAYER_SPEED = 4;
+
+const int WINDOW_WIDTH = 1280;
+const int WINDOW_HEIGHT = 720;
+
+
+
+
+
 
 #pragma comment(lib,"MSIMG32.LIB")
+
+
+IMAGE atlas_bullet_a, atlas_bullet_a_r,
+atlas_bullet_b,
+atlas_bullet_c,
+atlas_enemy_a,
+atlas_enemy_b,
+atlas_enemy_bul;
+
+IMAGE img_frame,
+
+img_avatar,
+img_avatar_hit,
+img_ui_quit_idle,
+img_ui_quit_hovered,
+img_ui_quit_push,
+img_ui_start_idle,
+img_ui_start_hovered,
+img_ui_start_push;
+
+
+ 
+
+
+
+
+
+
+
 
 
 
@@ -20,24 +65,41 @@ int main()
 
 	bool running = true;
 
+	Player player;
 	ExMessage msg;
+	IMAGE img_background;
 
-	IMAGE img_background,img_avatar,img_player,img_player_shadow,
-		img_frame,img_bullet;
+	
 
+	
+		AddFontResourceEx(_T("resou/IPix.ttf"), FR_PRIVATE, NULL);
 
-	bool is_move_up = false;
-	bool is_move_down = false;
-	bool is_move_left = false;
-	bool is_move_right= false;
+		loadimage(&img_background, _T("resou/img/background.png"));
+		loadimage(&img_avatar, _T("resou/img/avatar.png"));
+		loadimage(&img_avatar_hit, _T("resou/img/avatar_hit.png"));
+		loadimage(&img_frame, _T("resou/img/frame.png"));
+		loadimage(&img_ui_quit_idle, _T("resou/img/ui_quit_idle.png"));
+		loadimage(&img_ui_quit_hovered, _T("resou/img/ui_quit_hovered.png"));
+		loadimage(&img_ui_quit_push, _T("resou/img/ui_quit_push.png"));
+		loadimage(&img_ui_start_idle, _T("resou/img/ui_start_idle.png"));
+		loadimage(&img_ui_start_hovered, _T("resou/img/ui_start_hovered.png"));
+		loadimage(&img_ui_start_push, _T("resou/img/ui_start_push.png"));
 
+		
+		//loadimage(&atlas_player, _T("resou/atlas/player.png"));
+		//loadimage(&atlas_player_r, _T("resou/atlas/player_r.png"));
+		//loadimage(&atlas_player_shadow, _T("resou/atlas/player_shadow.png"));
+		loadimage(&atlas_bullet_a, _T("resou/atlas/bullet_a.png"));
+		loadimage(&atlas_bullet_a_r, _T("resou/atlas/bullet_a_r.png"));
+		loadimage(&atlas_bullet_b, _T("resou/atlas/bullet_b.png"));
+		loadimage(&atlas_bullet_c, _T("resou/atlas/bullet_c.png"));
+		loadimage(&atlas_enemy_a, _T("resou/atlas/enemy_a.png"));
+		loadimage(&atlas_enemy_b, _T("resou/atlas/enemy_b.png"));
+		loadimage(&atlas_enemy_bul, _T("resou/atlas/enemy_bul.png"));
 
-	loadimage(&img_background, _T("img/background.png"));
-	loadimage(&img_avatar, _T("img/avatar.png"));
-	loadimage(&img_player, _T("img/player.png"));
-	loadimage(&img_frame, _T("img/frame.png"));
-	loadimage(&img_player_shadow, _T("img/player_shadow.png"));
-	loadimage(&img_bullet, _T("img/bullet.png"));
+		
+
+	
 
 	BeginBatchDraw();
 
@@ -50,55 +112,13 @@ int main()
 		
 		while (peekmessage(&msg))
 		{
-			if (msg.message == WM_KEYDOWN)
-			{
-				
-				switch (msg.vkcode)
-				{
-				case 87://W
-					is_move_up = true;
-					break;
-				case 83://S
-					is_move_down = true;
-					break;
-				case 65://A
-					is_move_left = true;
-					break;
-				case 68://D
-					is_move_right = true;
-					break;
-				}
-			}
-
-			if (msg.message == WM_KEYUP)
-			{
-
-				switch (msg.vkcode)
-				{
-				case 87://W
-					is_move_up = false;
-					break;
-				case 83://S
-					is_move_down = false;
-					break;
-				case 65://A
-					is_move_left = false;
-					break;
-				case 68://D
-					is_move_right = false;
-					break;
-				}
-			}
+			player.ProcessEvent(msg);
+			
 		}
 
-		if (is_move_up)
-			player_pos.y -= PLAYER_SPEED;
-		if (is_move_down)
-			player_pos.y += PLAYER_SPEED;
-		if (is_move_left)
-			player_pos.x-= PLAYER_SPEED;
-		if (is_move_right)
-			player_pos.x += PLAYER_SPEED;
+		player.Move();
+
+
 
 		static int counter = 0;
 		if ((2 * ++counter) % 5 == 0) 
@@ -106,24 +126,47 @@ int main()
 
 		idx_current_anim = idx_current_anim % PLAYER_ANIM_NUM;
 
+		
 
 		cleardevice();
 
 
 		putimage_alpha(0, 0, &img_background);
 
-		putimage_alpha(player_pos.x, player_pos.y, &img_player);
+		
+		
+		player.Draw();
+
+
 
 		putimage_alpha(4, 460, &img_avatar);
 
 		putimage_alpha(0, 456, &img_frame);
 
-		line(400, 720, 400, 560);
-		line(880, 720, 880, 560);
-		line(400, 560, 880, 560);
-		line(400, 720, 880, 720);
+		
+		
+		
+		
+		
+		line(490, 720, 490, 620);
+		line(790, 720, 790, 620);
+		line(470, 720, 790, 720);
+		line(470, 620, 790, 620);
+		line(470, 720, 470, 620);
 
-		circle(1120, 160, 80);
+		line(800, 720, 864, 720);
+		line(800, 620, 864, 620);
+		line(800, 720, 864, 620);
+		line(864, 720, 800, 620);
+
+		line(1060, 40, 1060, 80);
+		line(1060, 80, 980, 80);
+		line(980, 80, 980, 40);
+		line(980, 40, 1060, 40);
+
+
+
+		circle(1160, 120, 80);
 
 
 		FlushBatchDraw();
