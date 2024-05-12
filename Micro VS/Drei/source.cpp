@@ -3,10 +3,8 @@
 #include<string>
 #include<vector>
 #include<windows.h>
-#include<tchar.h>
 #include<mmsystem.h>
 #include <easyx.h>
-#include <conio.h>
 
 
 #include"util.h"
@@ -75,6 +73,16 @@ void DrawTp(int tp) {
 	setbkmode(TRANSPARENT);
 	settextcolor((RGB(255, 85, 255)));
 	outtextxy(1080, 120, text);
+
+}
+
+void DrawSco(int sco) {
+	static TCHAR text[64];
+	_stprintf_s(text, _T("Current Sco:%d"), sco);
+
+	setbkmode(TRANSPARENT);
+	settextcolor((RGB(255, 85, 255)));
+	outtextxy(80, 40, text);
 
 }
 
@@ -275,6 +283,7 @@ int main()
 			for (Bullet& bullet : bullet_list)
 				bullet.Draw();
 			//DrawTp(tp);
+			DrawSco(sco);
 
 
 			//putimage_alpha(4, 460, &img_avatar);
