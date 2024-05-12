@@ -1,2 +1,5 @@
 ﻿  source.cpp
+E:\Proj Temp\Micro VS\Drei\enemy.h(33,23): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  (编译源文件“source.cpp”)
+  
   Drei.vcxproj -> E:\Proj Temp\Micro VS\Drei\x64\Debug\Drei.exe

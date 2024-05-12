@@ -7,6 +7,8 @@
 #include"util.h"
 
 
+#pragma comment(lib,"MSIMG32.LIB")
+
 class Player
 {
 public:
@@ -76,23 +78,22 @@ public:
 		{
 			double normalized_x = dir_x / len_dir;
 			double normalized_y = dir_y / len_dir;
-			player_pos.x += (int)(PLAYER_SPEED * normalized_x);
-			player_pos.y += (int)(PLAYER_SPEED * normalized_y);
+			pos.x += (int)(SPEED * normalized_x);
+			pos.y += (int)(SPEED * normalized_y);
 		}
 
-		if (player_pos.x < 0) player_pos.x = 0;
-		if (player_pos.y < 0)player_pos.y = 0;
-		if (player_pos.x + PLAYER_WIDTH > WINDOW_WIDTH)player_pos.x = WINDOW_WIDTH - PLAYER_WIDTH;
-		if (player_pos.y + PLAYER_HEIGHT > WINDOW_HEIGHT)player_pos.y = WINDOW_HEIGHT - PLAYER_HEIGHT;
+		if (pos.x < 0) pos.x = 0;
+		if (pos.y < 0)pos.y = 0;
+		if (pos.x + WIDTH > WINDOW_WIDTH)pos.x = WINDOW_WIDTH - WIDTH;
+		if (pos.y + HEIGHT > WINDOW_HEIGHT)pos.y = WINDOW_HEIGHT - HEIGHT;
 
 
 	}
 
 	void Draw()
 	{
-		int pos_shadow_x = player_pos.x + PLAYER_WIDTH / 16;
-		int pos_shadow_y = player_pos.y + PLAYER_HEIGHT - 6;
-
+		int pos_shadow_x = pos.x + WIDTH / 32;
+		int pos_shadow_y = pos.y + HEIGHT/2 - 4;
 		putimage_alpha(pos_shadow_x, pos_shadow_y, &atlas_player_shadow);
 
 
@@ -101,26 +102,32 @@ public:
 		if (dir_x < 0)facing_left = true;
 		else if (dir_x > 0)facing_left = false;
 
-		if (facing_left) putimage_alpha(player_pos.x, player_pos.y, &atlas_player);
-		else putimage_alpha(player_pos.x, player_pos.y, &atlas_player_r);
+		if (facing_left) putimage_alpha(pos.x, pos.y, &atlas_player);
+		else putimage_alpha(pos.x, pos.y, &atlas_player_r);
 
 
 
+	}
+
+	const POINT& GetPos() const
+	{
+		return pos;
 	}
 
 private:
 	IMAGE atlas_player;
 	IMAGE atlas_player_r;
 	IMAGE atlas_player_shadow;
-	const int PLAYER_SPEED = 6;
-	const int PLAYER_WIDTH = 32;
-	const int PLAYER_HEIGHT = 32;
+	const int SPEED = 6;
+	const int WIDTH = 64;
+	const int HEIGHT = 64;
 	const int WINDOW_WIDTH = 1280;
 	const int WINDOW_HEIGHT = 720;
+	
 
 
-
-	POINT player_pos = { 720 , 400 };
+private:
+	POINT pos = { 720 , 400 };
 	bool is_move_up = false;
 	bool is_move_down = false;
 	bool is_move_left = false;

@@ -25,6 +25,9 @@
     <Filter Include="头文件\unit\enemy">
       <UniqueIdentifier>{dbd20b3f-a39a-4668-80fc-22719d3cf06d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\util">
+      <UniqueIdentifier>{52f6b82a-256c-436f-bfd8-e27a4bfe24ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source.cpp">
@@ -32,9 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="util.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -47,7 +47,7 @@
     <ClInclude Include="scene.h">
       <Filter>头文件\scene</Filter>
     </ClInclude>
-    <ClInclude Include="bullet.h">
+    <ClInclude Include="bullet_a.h">
       <Filter>头文件\unit\bullet</Filter>
     </ClInclude>
     <ClInclude Include="game_scene.h">
@@ -61,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="animition.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>头文件\unit\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="gen.h">
+      <Filter>头文件\util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

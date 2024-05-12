@@ -131,9 +131,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animition.h" />
+    <ClInclude Include="bullet_a.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game_scene.h" />
+    <ClInclude Include="gen.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="menu_scene.h" />
     <ClInclude Include="player.h" />
